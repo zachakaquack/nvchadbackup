@@ -13,6 +13,10 @@ return {
     end,
   },
 
+  {
+    require('plugins.luasnip')
+  }
+
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
 
