@@ -11,6 +11,8 @@ return {
         json = { "jq" },
         python = { "black" },
         markdown = { "mdformat" },
+        html = { "prettier" },
+        typescript = { "prettier" },
         ["*"] = { "trim_whitespace", "trim_newlines" },
       },
     },

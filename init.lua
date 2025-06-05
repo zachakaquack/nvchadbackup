@@ -1,6 +1,14 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 
+vim.env.PATH = vim.env.PATH:gsub("\\", "/")
+
+-- Or explicitly set PATH in lua
+vim.env.PATH = table.concat({
+  "C:/Program Files/nodejs",
+  "C:/Users/Zach/AppData/Roaming/npm",
+  vim.env.PATH,
+}, ";")
 
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
