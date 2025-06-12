@@ -9,6 +9,7 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         json = { "jq" },
+        jsonc = { "jq" },
         python = { "black" },
         markdown = { "mdformat" },
         html = { "prettier" },

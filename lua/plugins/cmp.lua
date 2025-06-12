@@ -1,4 +1,3 @@
-
 return {
   "hrsh7th/nvim-cmp",
   dependencies = {
@@ -6,16 +5,16 @@ return {
     "saadparwaiz1/cmp_luasnip",
   },
   opts = function(_, opts)
-    local cmp = require("cmp")
+    local cmp = require "cmp"
     opts.snippet = {
       expand = function(args)
         require("luasnip").lsp_expand(args.body)
       end,
     }
-    opts.sources = cmp.config.sources({
+    opts.sources = cmp.config.sources {
       { name = "nvim_lsp" },
-      { name = "luasnip" }, -- Make sure this is here!
+      { name = "luasnip" },
       { name = "buffer" },
-    })
+    }
   end,
 }

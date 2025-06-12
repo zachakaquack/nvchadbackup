@@ -19,5 +19,21 @@ lspconfig.ts_ls.setup {
   end,
 }
 
+lspconfig.pyright.setup {
+  cmd = { "cmd.exe", "/C", "pyright-langserver", "--stdio" },
+  settings = {
+    python = {
+      pythonPath = "C:/Windows/py.exe",
+    },
+  },
+}
+
+vim.diagnostic.config {
+  virtual_text = {
+    prefix = "●",
+  },
+  update_in_insert = true,
+  severity_sort = true,
+}
 -- Enable the LSPs
 vim.lsp.enable { "html", "cssls", "ts_ls" }
