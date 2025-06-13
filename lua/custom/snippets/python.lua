@@ -1,17 +1,124 @@
-
--- python.lua
-local ls = require("luasnip")
+local ls = require "luasnip"
 local s = ls.snippet
 local t = ls.text_node
-local i = ls.insert_node
+local i = require("luasnip").insert_node
+local rep = require("luasnip.extras").rep
 
 return {
-  s("fn", {
-    t("def "), i(1, "function_name"), t("("), i(2, "args"), t("):"),
-    t({"", "\t"}), i(0),
+
+  s("ending", {
+    t {
+      "app = QApplication(sys.argv)",
+      "qdarktheme.setup_theme()",
+      "w = MainWindow()",
+      "w.show()",
+      "sys.exit(app.exec())",
+    },
+  }),
+  s("qtimports", {
+    t {
+      "from rich.traceback import install",
+      "from PySide6.QtCore import *",
+      "from PySide6.QtGui import *",
+      "from PySide6.QtWidgets import *",
+      "import qdarktheme",
+      "import sys",
+    },
+  }),
+  s("dinit", {
+    t "def __init__(self, *args, **kwargs):",
+    t { "", "  super().__init__(*args, *kwargs)" },
+  }),
+  s("mainwindow", {
+    t {
+      "class MainWindow(QMainWindow):",
+      "  def __init__(self, *args, **kwargs):",
+      "    super().__init__(*args, *kwargs)",
+      "",
+      "    self.setFixedSize(1280, 720)",
+      "",
+      "    self.main_widget = QFrame(self)",
+      "    self.main_layout = QVBoxLayout(self.main_widget)",
+      "    self.main_widget.setLayout(self.main_layout)",
+      "",
+      "    self.main_layout.setContentsMargins(0, 0, 0, 0)",
+      "    self.main_layout.setSpacing(0)",
+      "    self.main_layout.setAlignment(",
+      "      Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignHCenter",
+      "    )",
+      "",
+      "    self.setCentralWidget(self.main_widget)",
+      "",
+      "  def keyPressEvent(self, event: QKeyEvent, /) -> None:",
+      "    if event.key() == Qt.Key.Key_Escape:",
+      "      self.close()",
+      "",
+      "    return super().keyPressEvent(event)",
+    },
   }),
 
-  s("print", {
-    t("print("), i(1, "'Hello'"), t(")"), i(0),
+  s("layout", {
+    t "self.",
+    i(1, "main_layout"),
+    t " = QVBoxLayout(self)",
+    t { "", "self.setLayout(self." },
+    rep(1),
+    t { ")" },
+    t { "", "self." },
+    rep(1),
+    t ".setContentsMargins(0, 0, 0, 0)",
+    t { "", "self." },
+    rep(1),
+    t ".setSpacing(0)",
+    t { "", "self." },
+    rep(1),
+    t ".setAlignment(",
+    t {
+      "  Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignHCenter",
+      ")",
+    },
+  }),
+  s("full", {
+    t {
+      "from rich.traceback import install",
+      "from PySide6.QtCore import *",
+      "from PySide6.QtGui import *",
+      "from PySide6.QtWidgets import *",
+      "import qdarktheme",
+      "import sys",
+      "",
+      "install()",
+      "",
+      "class MainWindow(QMainWindow):",
+      "  def __init__(self, *args, **kwargs):",
+      "    super().__init__(*args, *kwargs)",
+      "",
+      "    self.setFixedSize(1280, 720)",
+      "",
+      "    self.main_widget = QFrame(self)",
+      "    self.main_layout = QVBoxLayout(self.main_widget)",
+      "    self.main_widget.setLayout(self.main_layout)",
+      "",
+      "    self.main_layout.setContentsMargins(0, 0, 0, 0)",
+      "    self.main_layout.setSpacing(0)",
+      "    self.main_layout.setAlignment(",
+      "      Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignHCenter",
+      "    )",
+      "",
+      "    self.setCentralWidget(self.main_widget)",
+      "",
+      "  def keyPressEvent(self, event: QKeyEvent, /) -> None:",
+      "    if event.key() == Qt.Key.Key_Escape:",
+      "      self.close()",
+      "",
+      "    return super().keyPressEvent(event)",
+      "",
+      "",
+      "app = QApplication(sys.argv)",
+      "qdarktheme.setup_theme()",
+      "w = MainWindow()",
+      "w.show()",
+      "sys.exit(app.exec())",
+    },
   }),
 }
