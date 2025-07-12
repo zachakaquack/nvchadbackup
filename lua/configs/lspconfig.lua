@@ -20,12 +20,11 @@ lspconfig.ts_ls.setup {
 }
 
 lspconfig.pyright.setup {
-  cmd = { "cmd.exe", "/C", "pyright-langserver", "--stdio" },
-  settings = {
-    python = {
-      pythonPath = "C:/Windows/py.exe",
-    },
-  },
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+    default_lsp.on_attach(client, bufnr)
+  end,
+  root_dir = lspconfig.util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git"),
 }
 
 vim.diagnostic.config {

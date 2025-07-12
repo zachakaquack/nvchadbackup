@@ -8,13 +8,10 @@ local M = {}
 -- M.plugins = "custom.plugins"
 
 M.base46 = {
-  theme = "tokyodark",
+  theme = "carbonfox",
   transparency = true,
 
-  -- hl_override = {
-  -- 	Comment = { italic = true },
-  -- 	["@comment"] = { italic = true },
-  -- },
+  hl_override = require("custom.highlights").override,
 }
 
 -- M.nvdash = { load_on_startup = true }
@@ -24,4 +21,6 @@ M.base46 = {
 --      }
 --}
 
+vim.api.nvim_set_hl(0, "Comment", { fg = "#b2b2b2" })
+vim.api.nvim_set_hl(0, "@comment", { link = "Comment" })
 return M

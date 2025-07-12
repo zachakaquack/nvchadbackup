@@ -11,7 +11,7 @@ end, {})
 -- word count
 map("n", "<leader>wc", "c<C-g>")
 
--- markdown complete 
+-- markdown complete
 map("n", "<leader>mmdc", "md0f ;rx`d")
 -- markdown incomplete
 map("n", "<leader>mmdi", "md0fxr `d")
@@ -39,4 +39,3 @@ map("v", '<leader>w`', "s``<ESC>P", { desc="Wrap `Wor|d|`" })
 -- wrap f"{word|}|"
 map("n", "<leader>wfs", 'ciwf""<ESC>i{}<ESC>Pf"i<ESC>', { desc="Wrap f\"{Word|}|\"" })
 map("n", "<leader>wfs", 'sf""<ESC>i{}<ESC>Pf"i<ESC>', { desc="Wrap f\"{Word|}|\"" })
-
