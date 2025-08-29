@@ -9,6 +9,12 @@ vim.api.nvim_create_user_command("EditWezterm", "edit ~/.config/wezterm/wezterm.
 
 vim.api.nvim_create_user_command("WordCount", "g<C-g>", { desc = "Word count" })
 
+vim.api.nvim_create_user_command("W", ":w", {})
+vim.api.nvim_create_user_command("Q", ":q", {})
+
+vim.api.nvim_create_user_command("WQ", ":wq", {})
+vim.api.nvim_create_user_command("Wq", ":wq", {})
+--
 -- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",

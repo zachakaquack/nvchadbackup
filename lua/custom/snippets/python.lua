@@ -3,6 +3,7 @@ local s = ls.snippet
 local t = ls.text_node
 local i = require("luasnip").insert_node
 local rep = require("luasnip.extras").rep
+local fmt = require("luasnip.extras.fmt").fmt
 
 return {
 
@@ -115,7 +116,7 @@ return {
       "",
       "",
       "app = QApplication(sys.argv)",
-      "qdarktheme.setup_theme()",
+      "qdarktheme.load_stylesheet()",
       "w = MainWindow()",
       "w.show()",
       "sys.exit(app.exec())",
@@ -194,4 +195,59 @@ return {
     t { "", "   if child.widget() and isinstance(child.widget(), QLabel):" },
     t { "", "       child.widget().deleteLater()" },
   }),
+  s("imagedialog", {
+    t {
+      "def _launch_dialog(self) -> None:",
+      "    dialog = QFileDialog(",
+      "        self,",
+      '        filter="PNG (*.png);;BMP (*.bmp);;CUR (*.cur);;GIF (*.gif);;ICNS (*.icns);;ICO (*.ico);;JPEG (*.jpeg);;JPG (*.jpg);;PBM (*.pbm);;PGM (*.pgm);;PPM (*.ppm);;SVG (*.svg);;SVGZ (*.svgz);;TGA (*.tga);;TIF (*.tif);;TIFF (*.tiff);;WBMP (*.wbmp);;WEBP (*.webp);;XBM (*.xbm);;XPM (*.xpm)",',
+      "    )",
+      "    dialog.fileSelected.connect(self._prepare_file)",
+      "    dialog.exec()",
+    },
+  }),
+
+  s(
+    "scrollarea",
+    fmt(
+      [[
+class {}(QScrollArea):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, *kwargs)
+
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+
+        self.setObjectName("scroller")
+        self.setStyleSheet(
+            """
+            #scroller {{
+                border: none;
+            }}
+            * {{
+                background-color: #1e1e1e;
+                color: white;
+            }}
+            """
+        )
+
+        self.main_widget = QFrame(self)
+        self.main_layout = QVBoxLayout(self.main_widget)
+        self.main_widget.setLayout(self.main_layout)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.setSpacing(0)
+        self.main_layout.setAlignment(
+            Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignHCenter
+        )
+
+        self.setWidgetResizable(True)
+        self.setWidget(self.main_widget)
+
+        {}
+]],
+      {
+        i(1, "ScrollArea"),
+        i(0),
+      }
+    )
+  ),
 }
